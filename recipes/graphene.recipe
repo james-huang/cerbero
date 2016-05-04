@@ -21,10 +21,10 @@ GRAPHENE_CONFIG_UNVERSAL='''\
 class Recipe(recipe.Recipe):
     name = 'graphene'
     stype = SourceType.TARBALL
-    version = '1.2.6'
+    version = 'master'
     url = 'https://github.com/ebassi/graphene/archive/{0}.tar.gz'.format(version)
     licenses = [License.MIT]
-    configure_options = ' --enable-static --enable-shared'
+    configure_options = ' --enable-static --enable-shared --disable-arm-neon'
     deps = ['glib']
 
     config_sh = 'sh ./autogen.sh'

@@ -120,6 +120,8 @@ def system_info():
             arch = Architecture.X86_64
         elif arch.endswith('86'):
             arch = Architecture.X86
+        elif arch == 'armv7l':
+            arch = Architecture.ARMv7L
         else:
             raise FatalError(_("Architecture %s not supported") % arch)
 
@@ -324,8 +326,13 @@ def add_system_libs(config, new_env):
 
     search_paths = [os.environ['PKG_CONFIG_LIBDIR'],
         os.path.join(sysroot, 'usr', libdir, 'pkgconfig'),
-        os.path.join(sysroot, 'usr/share/pkgconfig'),
-        os.path.join(sysroot, 'usr/lib/%s-linux-gnu/pkgconfig' % arch)]
+        #os.path.join(sysroot, 'usr/share/pkgconfig'),
+        #os.path.join(sysroot, 'usr/lib/%s-linux-gnu/pkgconfig' % arch)]
+        os.path.join(sysroot, 'usr/share/pkgconfig')]
+    if arch == Architecture.ARMv7L:
+        search_paths += [os.path.join(sysroot, 'usr/lib/arm-linux-gnueabihf/pkgconfig')]
+    else:
+        search_paths += [os.path.join(sysroot, 'usr/lib/%s-linux-gnu/pkgconfig' % arch)]
     new_env['PKG_CONFIG_PATH'] = ':'.join(search_paths)
 
     search_paths = [os.environ.get('ACLOCAL_PATH', ''),

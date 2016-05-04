@@ -31,7 +31,7 @@ class Recipe(custom.GStreamerStatic):
     gstreamer_version = '1.0'
     stype = SourceType.GIT
     licenses = [License.BSD_like]
-    remotes = { 'origin': 'https://github.com/EricssonResearch/openwebrtc-gst-plugins.git' }
+    remotes = { 'origin': 'https://github.com/james-huang/openwebrtc-gst-plugins.git' }
     commit = 'origin/master'
     autoreconf = True
     autoreconf_sh = 'mkdir -p m4 && autoreconf -fiv'
@@ -54,7 +54,30 @@ class Recipe(custom.GStreamerStatic):
 
     def prepare(self):
         # Don't build ercolorspace because we use videoconvert everywhere now
+        self.append_env['CFLAGS'] = " -Wno-error "
+        self.append_env['CXXFLAGS'] = " -Wno-error "
+        self.append_env['GST_CFLAGS'] = " -Wno-error "
+        self.append_env['GST_CXXFLAGS'] = " -Wno-error "
+        self.append_env['OBJCFLAGS'] = " -Wno-error "
+        self.append_env['CCASFLAGS'] = " -Wno-error "
+        self.append_env['LDFLAGS'] = " -Wno-error "
+        self.new_env['C_INCLUDE_PATH'] = \
+                "/opt/openwebrtc-0.3/include" \
+                ":/opt/openwebrtc-0.3/include/gstreamer-1.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0/glib" \
+                ":/opt/openwebrtc-0.3/lib/glib-2.0/include" \
+                ":/opt/openwebrtc-0.3/lib/gstreamer-1.0/include"
+        self.new_env['CPLUS_INCLUDE_PATH'] = \
+                "/opt/openwebrtc-0.3/include" \
+                ":/opt/openwebrtc-0.3/include/gstreamer-1.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0/glib" \
+                ":/opt/openwebrtc-0.3/lib/glib-2.0/include" \
+                ":/opt/openwebrtc-0.3/lib/gstreamer-1.0/include"
+
         self.configure_options += ' \
+            --disable-werror \
             --disable-erdtls \
             --disable-debug \
             --disable-android-plugins \

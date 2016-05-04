@@ -57,10 +57,17 @@ class Recipe(recipe.Recipe):
     }
 
     def prepare(self):
+        self.append_env['CFLAGS'] = " -Wno-error "
+        self.append_env['CXXFLAGS'] = " -Wno-error "
+        self.append_env['OBJCFLAGS'] = " -Wno-error "
+        self.append_env['CCASFLAGS'] = " -Wno-error "
+        self.append_env['LDFLAGS'] = " -Wno-error "
+
         # Don't build ercolorspace because we use videoconvert everywhere now
         self.configure_options = ' \
             --enable-shared \
             --enable-static \
+            --disable-werror \
             --disable-erdtls \
             --disable-debug \
             --disable-static-plugins \
