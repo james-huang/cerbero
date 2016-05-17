@@ -15,7 +15,8 @@ class Recipe(recipe.Recipe):
                     "--libdir=%(libdir)s %(options)s"
     configure_options = "--enable-pic --as=yasm --disable-unit-tests --size-limit=16384x16384 "\
                         "--enable-postproc --enable-multi-res-encoding --enable-temporal-denoising "\
-                        "--enable-vp9-temporal-denoising --enable-vp9-postproc "
+                        "--enable-vp9-temporal-denoising --enable-vp9-postproc --enable-shared "\
+                        "--disable-static "
     add_host_build_target = False
     supports_cache_variables = False
     can_use_configure_cache = False
@@ -46,6 +47,10 @@ class Recipe(recipe.Recipe):
         elif self.config.target_arch == Architecture.ARM:
             arch = 'arm'
         elif self.config.target_arch == Architecture.ARMv7:
+            arch = 'armv7'
+        elif self.config.target_arch == Architecture.ARMv7L:
+            self.append_env['CFLAGS'] = " -fPIC "
+            self.append_env['CXXFLAGS'] = " -fPIC "
             arch = 'armv7'
         elif self.config.target_arch == Architecture.ARMv7S:
             arch = 'armv7s'
