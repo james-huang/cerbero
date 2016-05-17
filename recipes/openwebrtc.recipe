@@ -155,6 +155,13 @@ class Recipe(recipe.Recipe):
             if self.config.target_platform == Platform.LINUX:
                 # Use system libraries for libpulse, and libv4l2
                 self.use_system_libs = True
+                self.configure_options += ' --enable-gtk-doc'
+                self.append_env['CFLAGS'] = " -Wno-error "
+                self.append_env['CXXFLAGS'] = " -Wno-error "
+                self.append_env['OBJCFLAGS'] = " -Wno-error "
+                self.append_env['CCASFLAGS'] = " -Wno-error "
+                self.append_env['LDFLAGS'] = " -Wno-error "
+                self.configure_options += ' -disable-werror '
             elif self.config.target_platform == Platform.DARWIN:
                 self.append_env['XML_CATALOG_FILES'] = self.config.prefix + '/share/xml/catalog'
         else:
