@@ -362,10 +362,16 @@ def add_system_libs(config, new_env):
     if config.sysroot:
         sysroot = config.sysroot
 
+    if Architecture.is_arm(arch):
+        arch = 'arm'
+        toolchain = 'gnueabihf'
+    else:
+        toolchain = 'gnu'
+
     search_paths = [os.environ['PKG_CONFIG_LIBDIR'],
         os.path.join(sysroot, 'usr', libdir, 'pkgconfig'),
         os.path.join(sysroot, 'usr/share/pkgconfig'),
-        os.path.join(sysroot, 'usr/lib/%s-linux-gnu/pkgconfig' % arch)]
+        os.path.join(sysroot, 'usr/lib/%s-linux-%s/pkgconfig' % (arch, toolchain))]
     new_env['PKG_CONFIG_PATH'] = ':'.join(search_paths)
 
     search_paths = [os.environ.get('ACLOCAL_PATH', ''),
