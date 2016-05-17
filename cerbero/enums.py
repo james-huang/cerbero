@@ -34,6 +34,7 @@ class Architecture:
     ARM = 'arm'
     ARMv7 = 'armv7'
     ARMv7S = 'armv7s'
+    ARMv7L = 'armv7l'
     ARM64 = 'arm64'
 
     @staticmethod
@@ -43,7 +44,7 @@ class Architecture:
         wish to do something special for 64bit you should first check for
         that before calling this method.'''
         return arch in [Architecture.ARM, Architecture.ARMv7,
-                Architecture.ARMv7S, Architecture.ARM64]
+                Architecture.ARMv7L, Architecture.ARMv7S, Architecture.ARM64]
 
 
 class Distro:
