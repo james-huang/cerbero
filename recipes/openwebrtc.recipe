@@ -74,7 +74,7 @@ class Recipe(recipe.Recipe):
     }
 
     def prepare(self):
-        self.configure_options += ' --disable-bridge '
+        self.configure_options += ' --disable-bridge --disable-gtk-doc-html'
         if self.config.target_platform in (Platform.IOS, Platform.ANDROID):
             # Building tests is useless while cross-compiling
             self.configure_options += ' --disable-gtk-doc --enable-static \
