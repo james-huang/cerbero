@@ -21,10 +21,10 @@ GRAPHENE_CONFIG_UNVERSAL='''\
 class Recipe(recipe.Recipe):
     name = 'graphene'
     stype = SourceType.TARBALL
-    version = '1.4.0'
+    version = 'master'
     url = 'https://github.com/ebassi/graphene/archive/{0}.tar.gz'.format(version)
     licenses = [License.MIT]
-    # Disable NEON completly, it's broken and experimental   
+    # Disable NEON completly, it's broken and experimental
     configure_options = ' --enable-static --enable-shared --disable-arm-neon'
     deps = ['glib']
 
@@ -56,6 +56,8 @@ class Recipe(recipe.Recipe):
             arch = self.config.target_arch
             if arch == Architecture.X86_64:
                 self.new_env['SSE41_CFLAGS'] = " "
+        if Architecture.is_arm(self.config.target_arch):
+            self.configure_options += ' --disable-arm-neon '
 
     def post_install(self):
         if self.config.target_platform in [Platform.DARWIN, Platform.IOS]:
