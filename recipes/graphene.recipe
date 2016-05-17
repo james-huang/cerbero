@@ -21,7 +21,7 @@ GRAPHENE_CONFIG_UNVERSAL='''\
 class Recipe(recipe.Recipe):
     name = 'graphene'
     stype = SourceType.TARBALL
-    version = '1.2.6'
+    version = 'master'
     url = 'https://github.com/ebassi/graphene/archive/{0}.tar.gz'.format(version)
     licenses = [License.MIT]
     configure_options = ' --enable-static --enable-shared'
@@ -46,6 +46,9 @@ class Recipe(recipe.Recipe):
         # Graphene don't support SSE2 dynamically, disable for now
         if self.config.target_arch == Architecture.X86:
             self.configure_options += ' --disable-sse2 --disable-gcc-vector '
+
+        if Architecture.is_arm(self.config.target_arch):
+            self.configure_options += ' --disable-arm-neon '
 
     def post_install(self):
         if self.config.target_platform in [Platform.DARWIN, Platform.IOS]:
