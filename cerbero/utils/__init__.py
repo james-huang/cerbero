@@ -143,6 +143,8 @@ def system_info():
             arch = Architecture.X86_64
         elif arch.endswith('86'):
             arch = Architecture.X86
+        elif arch == 'armv7l':
+            arch = Architecture.ARMv7L
         elif arch.startswith('armv7'):
             arch = Architecture.ARMv7
         elif arch.startswith('arm'):
