@@ -52,8 +52,7 @@ class Package(package.Package):
 
     def prepare(self):
         if self.config.variants.owr_bridge:
-            self.files.append('seed:libs')
-            self.platform_files[Platform.LINUX] += ['javascriptcoregtk:libs', 'icu:libs']
+            self.platform_files[Platform.LINUX] += ['icu:libs']
             # TODO: Needs javascriptcore and stuff on others
         if self.config.variants.python:
             self.files.append('gst-python-1.0')
