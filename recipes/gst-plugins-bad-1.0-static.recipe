@@ -17,9 +17,9 @@ class Recipe(custom.GStreamerStatic):
         --disable-pvr --disable-sdl --disable-sndfile \
         --disable-teletextdec --disable-timidity \
         --disable-vdpau --disable-voamrwbenc --disable-wildmidi \
-        --disable-xvid --disable-zbar --disable-sdi --disable-hls --disable-qt'
+        --disable-xvid --disable-zbar --disable-sdi --disable-hls --disable-qt --disable-wayland '
     remotes = {'origin': 'git://anongit.freedesktop.org/gstreamer/gst-plugins-bad'}
-    commit = 'b9cfa34118e023efb046a9eac78f1b5c275bf839'
+    commit = '537ba5d1091baa3ac7273eabf4b4d60b37304fce'
     deps = ['gstreamer-1.0', 'gst-plugins-base-1.0', 'zlib', 'openh264', 'opus',
             'libsrtp', 'openssl', 'graphene']
     use_system_libs = True
@@ -109,7 +109,7 @@ class Recipe(custom.GStreamerStatic):
         self.append_env['CXXFLAGS'] = " -Wno-error "
         self.append_env['CPPFLAGS'] = " -Wno-error "
         if self.config.target_platform != Platform.LINUX:
-            self.configure_options += '--disable-gtk-doc '
+            self.configure_options += '--disable-gtk-doc --disable-wayland '
         if self.config.variants.gtk3:
             self.deps.append("gtk+3")
             self.files_plugins_sys = ["libgstgtksink"]
