@@ -57,6 +57,9 @@ class Recipe(recipe.Recipe):
                 make += ' ARCH=x86'
             elif self.config.target_arch == Architecture.X86_64:
                 make += ' ARCH=x86_64'
+        elif self.config.target_platform == Platform.LINUX:
+            if self.config.target_arch == Architecture.ARMv7L:
+                make += ' ARCH=armv7l'
         self.make = make + ' libraries'
         # `make install` also needs the exact same parameters as `make`
         self.make_install = make + ' install'
