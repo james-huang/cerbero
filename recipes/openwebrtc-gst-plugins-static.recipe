@@ -54,14 +54,7 @@ class Recipe(custom.GStreamerStatic):
 
     def prepare(self):
         # Don't build ercolorspace because we use videoconvert everywhere now
-        self.append_env['CFLAGS'] = " -Wno-error "
-        self.append_env['CXXFLAGS'] = " -Wno-error "
-        self.append_env['OBJCFLAGS'] = " -Wno-error "
-        self.append_env['CCASFLAGS'] = " -Wno-error "
-        self.append_env['LDFLAGS'] = " -Wno-error "
-
         self.configure_options += ' \
-            --disable-werror \
             --disable-erdtls \
             --disable-debug \
             --disable-android-plugins \
