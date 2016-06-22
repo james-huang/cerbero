@@ -25,3 +25,12 @@ class Recipe(custom.GStreamerStatic):
 
     files_plugins_net_devel = ['libgstnice']
     # FIXME - if_arp.h? (iOS)
+
+    # Temporarily prevent pulling from source when I drop print statements everywhere
+    def fetch(self):
+        print "dont actually fetch anything"
+
+    # Temporarily prevent extract and patch I drop print statements everywhere
+    def extract(self):
+        shell.call('make clean', self.build_dir)
+        print "did a make clean. but dont actually extract anything"
