@@ -39,31 +39,3 @@ class Recipe(recipe.Recipe):
         shell.replace(os.path.join(self.build_dir, 'gst', 'Makefile.am'),
                       {'-module': '-shared -module'})
         super(Recipe, self).configure()
-
-    # Temporarily prevent pulling from source when I drop print statements everywhere
-    def fetch(self):
-        print "dont actually fetch anything (distribute updated files)"
-        # adding print statments and stuff to /Users/james/cerbero/sources/ios_universal/arm64/libnice-0.1.13
-        # need to push changes to all the other architectures
-        src_distribution = 'arm64'
-        src_path1 = '/Users/james/cerbero/sources/ios_universal'
-        src_path2 = 'libnice-0.1.13'
-        dst_distributions = ['armv7', 'armv7s', 'x86', 'x86_64']
-        updated_files = [
-            'agent/agent.c',
-            'agent/conncheck.c',
-            # 'agent/conncheck.h',
-            'agent/component.c',
-            'agent/discovery.c',
-            'socket/tcp-active.c',
-        ]
-        for f in updated_files:
-          for d in  dst_distributions:
-            cmd = "cp %s/%s/%s/%s %s/%s/%s/%s" % (src_path1, src_distribution, src_path2, f, src_path1, d, src_path2, f)
-            shell.call(cmd, self.build_dir)
-
-    # Temporarily prevent extract and patch I drop print statements everywhere
-    def extract(self):
-        shell.call('make clean', self.build_dir)
-        print "did a make clean. but dont actually extract anything"
-
