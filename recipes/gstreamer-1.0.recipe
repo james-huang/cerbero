@@ -24,7 +24,8 @@ class Recipe(recipe.Recipe):
     config_sh = 'sh ./autogen.sh --noconfigure && ./configure'
     configure_options = "--enable-static --program-prefix= --disable-examples "
     remotes = {'origin': 'git://anongit.freedesktop.org/gstreamer/gstreamer'}
-    commit = 'a4db38ab0578e598abf466a53dc6965c91e7a32e'
+    # commit = 'a4db38ab0578e598abf466a53dc6965c91e7a32e'
+    commit = '56ee365077878819a0c4d938d9385bb18b5386b3'
     deps = ['glib', 'gtk-doc-lite']
 
     files_bins = ['gst-inspect-1.0',
