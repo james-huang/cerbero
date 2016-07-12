@@ -60,6 +60,20 @@ class Recipe(custom.GStreamerStatic):
             --disable-android-plugins \
             --disable-osx-plugins \
             --disable-linux-plugins'
+        self.new_env['C_INCLUDE_PATH'] = \
+                "/opt/openwebrtc-0.3/include" \
+                ":/opt/openwebrtc-0.3/include/gstreamer-1.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0/glib" \
+                ":/opt/openwebrtc-0.3/lib/glib-2.0/include" \
+                ":/opt/openwebrtc-0.3/lib/gstreamer-1.0/include"
+        self.new_env['CPLUS_INCLUDE_PATH'] = \
+                "/opt/openwebrtc-0.3/include" \
+                ":/opt/openwebrtc-0.3/include/gstreamer-1.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0" \
+                ":/opt/openwebrtc-0.3/include/glib-2.0/glib" \
+                ":/opt/openwebrtc-0.3/lib/glib-2.0/include" \
+                ":/opt/openwebrtc-0.3/lib/gstreamer-1.0/include"
         if self.config.target_platform == Platform.IOS:
             self.configure_options += ' --enable-colorspace-converter'
         else:
