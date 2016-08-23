@@ -17,7 +17,7 @@ class Recipe(custom.GStreamerStatic):
         --disable-pvr --disable-sdl --disable-sndfile \
         --disable-teletextdec --disable-timidity \
         --disable-vdpau --disable-voamrwbenc --disable-wildmidi \
-        --disable-xvid --disable-zbar --disable-sdi --disable-hls --disable-qt --disable-wayland '
+        --disable-xvid --disable-zbar --disable-sdi --disable-hls --disable-wayland '
     remotes = {'origin': 'git://anongit.freedesktop.org/gstreamer/gst-plugins-bad'}
     commit = '34c88dca2d977638bf6669d321bf92eea566cbf3'
     deps = ['gstreamer-1.0', 'gst-plugins-base-1.0', 'zlib', 'openh264', 'opus',
